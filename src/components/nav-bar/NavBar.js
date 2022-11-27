@@ -6,18 +6,41 @@ import { AiOutlineShopping } from "react-icons/ai";
 import classes from "./NavBar.module.css";
 import { useSelector } from "react-redux";
 import { CartSideMenu } from "../cart-side-menu/CartSideMenu";
+import mockLogo from "../../assets/images/cupPicture.png";
 
 export const NavBar = () => {
   const products = useSelector((state) => state.products);
   const headerRef = React.createRef();
-  const [opacity, setOpacity] = useState(0);
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+  const [cartIsOpen, setCartIsOpen] = useState(false);
+  const [opacity, setOpacity] = useState(
+    getWindowSize().innerWidth < 600 ? 1 : 0
+  );
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+  function getWindowSize() {
+    const { innerWidth, innerHeight } = window;
+    return { innerWidth, innerHeight };
+  }
   useEffect(() => {
     const headerHeight = headerRef.current.clientHeight;
     const range = 100;
     const offset = headerHeight * 2;
 
     const didScrollPage = (e) => {
-      let calc = 0 + (window.scrollY - offset + range) / range;
+      let calc =
+        windowSize.innerWidth > 600
+          ? 0 + (window.scrollY - offset + range) / range
+          : 1;
 
       if (calc > 1) {
         calc = 1;
@@ -42,6 +65,14 @@ export const NavBar = () => {
     return arrFilt;
   };
 
+  const handleCartClose = (newValue) => {
+    setCartIsOpen(false);
+  };
+
+  const handleCartOpen = (newValue) => {
+    windowSize.innerWidth > 600 && setCartIsOpen(true);
+  };
+
   return (
     <div
       className={classes.container}
@@ -50,13 +81,15 @@ export const NavBar = () => {
         backgroundColor: `rgba(255, 255, 255, ${opacity})`,
         boxShadow: opacity < 0.5 && "none",
       }}
-      // style={{ opacity: opacity, backgroundColor: "rgba(255, 255, 255, 1)" }}
     >
       <div className={classes.subContainer}>
+        <NavLink to="/home">
+          <img src={mockLogo} className={classes.mockLogo} />
+        </NavLink>
         <NavLink style={{ color: opacity < 0.5 && "white" }} to="/home">
           Par Mums
         </NavLink>
-        <NavLink style={{ color: opacity < 0.5 && "white" }} to="/">
+        <NavLink style={{ color: opacity < 0.5 && "white" }} to="/shop">
           Veikals
         </NavLink>
         <NavLink style={{ color: opacity < 0.5 && "white" }} to="/contacts">
@@ -64,25 +97,31 @@ export const NavBar = () => {
         </NavLink>
       </div>
       <div className={classes.subContainerSecond}>
-        {/* <div className="subContainer subContainer--second"> */}
-        <div className={classes.cartIconContainer}>
+        <div
+          className={classes.cartIconContainer}
+          onMouseOver={() => handleCartOpen()}
+          onMouseOut={() => setCartIsOpen(false)}
+        >
           <NavLink to="/cart">
             <AiOutlineShopping className={classes.cartIcon} />
             {products?.length > 0 && (
               <div className={classes.productCount}>{products.length}</div>
             )}
           </NavLink>
-          <div className={classes.navBarCartContainer}>
-            <CartSideMenu
-              filteredCart={removeDuplicatesArray()}
-              cart={products}
-            />
-          </div>
+          {cartIsOpen && (
+            <div className={classes.navBarCartContainer}>
+              <CartSideMenu
+                filteredCart={removeDuplicatesArray()}
+                cart={products}
+                handleCartClose={() => handleCartClose()}
+              />
+            </div>
+          )}
         </div>
         <img
           className={classes.languageSelector}
           src={latvianFlag}
-          alt="Shopping Cart"
+          alt="Language"
         />
       </div>
     </div>

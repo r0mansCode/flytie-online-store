@@ -1,8 +1,11 @@
-import "./CartSideMenu.css";
+import cn from "./CartSideMenu.module.css";
 import { useDispatch } from "react-redux";
 import { itemAdded, itemRemoved } from "../../features/counter/counterSlice";
+import { FaTimes } from "react-icons/fa";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { NavLink } from "react-router-dom";
 
-export const CartSideMenu = ({ cart, filteredCart }) => {
+export const CartSideMenu = ({ cart, filteredCart, handleCartClose }) => {
   const dispatch = useDispatch();
   const countItems = (array, id) => {
     const filteredArray = array?.filter((item) => item.id === id);
@@ -18,31 +21,37 @@ export const CartSideMenu = ({ cart, filteredCart }) => {
   };
 
   return (
-    <div className="cartSideMenuContainer">
-      <div className="cartTitle">Iepirkuma Grozs</div>
-      <div className="cartSideMenuItemListContainer">
+    <div className={cn.cartSideMenuContainer}>
+      <div className={cn.titleRow}>
+        <div className={cn.cartTitle}>Iepirkumu Grozs</div>
+        <FaTimes
+          style={{ cursor: "pointer" }}
+          onClick={() => handleCartClose()}
+        />
+      </div>
+      <div className={cn.cartSideMenuItemListContainer}>
         {filteredCart.map((item) => {
           return (
-            <div className="cartSideMenuItem">
+            <div className={cn.cartSideMenuItem}>
               <section>
                 <img
                   src={item.image}
-                  className="cartSideMenuItemImage"
+                  className={cn.cartSideMenuItemImage}
                   alt="Shopping Item"
                 />
               </section>
               <section>
-                <div className="cartSideMenuItemName">{item.name}</div>
-                <div className="quantitySelectorRow">
-                  <div
-                    className="addRemove"
+                <div className={cn.cartSideMenuItemName}>{item.name}</div>
+                <div className={cn.quantitySelectorRow}>
+                  <AiOutlineMinus
+                    className={cn.addRemove}
                     onClick={() => dispatch(itemRemoved(item.id))}
-                  >
-                    -
+                  />
+                  <div className={cn.itemCount}>
+                    {countItems(cart, item.id)}
                   </div>
-                  {countItems(cart, item.id)}
-                  <div
-                    className="addRemove"
+                  <AiOutlinePlus
+                    className={cn.addRemove}
                     onClick={() =>
                       dispatch(
                         itemAdded({
@@ -53,14 +62,12 @@ export const CartSideMenu = ({ cart, filteredCart }) => {
                         })
                       )
                     }
-                  >
-                    +
-                  </div>
+                  />
                 </div>
               </section>
-              <section className="thirdSection">
-                <div className="cartItemPrice">Cena</div>
-                <div className="cartItemSideMenuPriceNumber">
+              <section className={cn.thirdSection}>
+                <div className={cn.cartItemPrice}>Cena</div>
+                <div className={cn.cartItemSideMenuPriceNumber}>
                   €{countItems(cart, item.id) * item.price}
                 </div>
               </section>
@@ -68,7 +75,16 @@ export const CartSideMenu = ({ cart, filteredCart }) => {
           );
         })}
       </div>
-      <div className="totalAmmount">Kopā: €{totalPrice()}</div>
+      <div className={cn.totalAmmount}>
+        {cart?.length > 0 ? (
+          <NavLink to="/cart">
+            <div onClick={() => handleCartClose()}>Apskatīt Grozu</div>
+          </NavLink>
+        ) : (
+          <div>Iepirkumu grozs ir tukšs</div>
+        )}
+        <div>Kopā: €{totalPrice()}</div>
+      </div>
     </div>
   );
 };

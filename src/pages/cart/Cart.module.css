@@ -3,6 +3,8 @@
   background-color: white;
   border-radius: 8px;
   width: 75%;
+  max-width: 1200px;
+  min-width: 1050px;
   margin: 0 0 24px;
   padding: 32px 86px;
   display: flex;
@@ -15,6 +17,24 @@
   display: flex;
   flex-direction: row;
   gap: 32px;
+}
+
+.quantitySelectorRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.changeCount {
+  margin-bottom: -3px;
+}
+
+.cartTitle {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 22px;
+  width: 100%;
+  text-align: left;
 }
 
 .cartItemListContainer {
@@ -42,7 +62,17 @@
   flex-direction: row !important;
   align-items: center;
   justify-content: flex-start;
+  flex-grow: 1;
   margin-right: 24px;
+}
+
+.cartItemSecondSection {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0 12px 22px;
 }
 
 .cartItemName {
@@ -134,4 +164,73 @@
 
 .removeAllButton {
   cursor: pointer;
+  margin-bottom: -3px;
+}
+
+.emptyCart {
+  width: 100%;
+  text-align: start;
+}
+
+.directToShopButton {
+  width: fit-content;
+  padding: 8px;
+  margin-top: 12px;
+  border-radius: 8px;
+  background-color: rgb(10, 139, 10);
+  color: white;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 800px) {
+  .cartContainer {
+    /* background-image: linear-gradient(to top, #a1a1a1, #e0e0e0); */
+    background-color: white;
+    border-radius: 8px;
+    width: 100%;
+    margin: 0 0 24px;
+    padding: 32px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 200px;
+  }
+  .cartSubcontainer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .cartItem {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid rgba(126, 126, 126, 0.2);
+    box-shadow: 2px 4px 15px -2px rgb(174, 171, 171);
+    border-radius: 8px;
+  }
+
+  .cartItemSecondSection {
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .cartTotalAmmount {
+    min-width: 200px;
+  }
+
+  .removeAllButton {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    /* margin-bottom: -3px; */
+  }
 }

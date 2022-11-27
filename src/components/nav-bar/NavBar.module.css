@@ -4,13 +4,13 @@
   display: flex;
   box-sizing: border-box;
   padding: 12px 48px;
-  margin-bottom: 24px;
   width: 100%;
   justify-content: space-between;
   background-color: white;
   font-weight: 500;
   border-bottom: 1px solid rgb(255, 255, 255 0.7);
   box-shadow: 0 2px 5px -2px rgba(122, 122, 122, 0.2);
+  z-index: 20;
 }
 
 .container:hover {
@@ -51,7 +51,6 @@ a:hover {
 
 .subContainerSecond {
   display: flex;
-  gap: 24px;
   align-items: center;
   gap: 24px;
 }
@@ -108,14 +107,38 @@ button:hover {
   background-color: rgb(10, 139, 10);
 }
 
-.cartIconContainer:hover .navBarCartContainer {
-  display: block;
-}
+/* .cartIconContainer:hover .navBarCartContainer {
+  display: flex;
+  justify-content: flex-end;
+} */
 
 .navBarCartContainer {
-  display: none;
-  position: absolute;
-  /* translate: 0 10px; */
+  /* display: none; */
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
   right: 0;
-  z-index: 100;
+  top: 58px;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+.mockLogo {
+  width: 15px;
+}
+
+@media only screen and (max-width: 800px) {
+  .cartIconContainer:hover .navBarCartContainer {
+    display: none;
+  }
+
+  .container {
+    padding: 12px;
+  }
+
+  .languageSelector {
+    display: none;
+  }
 }

@@ -1,4 +1,10 @@
 .App {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 140px;
+  min-height: 100vh;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -10,4 +16,19 @@
   height: 400px;
   background-image: url("./assets/images/cocktailsHorizontal.png");
   background-position: 50% 30%;
+}
+
+.appGap {
+  margin-bottom: 78px;
+}
+
+@media only screen and (max-width: 800px) {
+  .backGroundImage {
+    height: 250px;
+    background-size: contain;
+    background-position: 50% 100%;
+  }
+  .appGap {
+    margin-bottom: 0px;
+  }
 }

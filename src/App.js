@@ -12,11 +12,12 @@ function App() {
     <div className="App">
       <NavBar />
       <div className="backGroundImage" />
-      <div style={{ marginBottom: "78px" }} />
+      <div className="appGap" />
       <Routes>
-        <Route path="/" element={<Shop />} />
+        <Route path="/shop" element={<Shop />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />

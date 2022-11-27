@@ -9,7 +9,7 @@ export const Footer = () => {
         <NavLink className="footerLink" to="/home">
           Par Mums
         </NavLink>
-        <NavLink className="footerLink" to="/">
+        <NavLink className="footerLink" to="/shop">
           Veikals
         </NavLink>
         <NavLink className="footerLink" to="/contacts">
@@ -17,7 +17,7 @@ export const Footer = () => {
         </NavLink>
       </div>
       <div className="footerSubContainer">
-        <div>Seko mums:::</div>
+        <div>Seko mums</div>
         <FaFacebookF className="footerIcon" />
         <FaInstagram className="footerIcon" />
         <FaYoutube className="footerIcon" />
