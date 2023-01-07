@@ -27,7 +27,7 @@ export const Home = () => {
         <div></div>
         <div className="bulletpointRow">
           <CiDeliveryTruck className="animatedBulletPoints" /> Bezmaksas piegāde
-          Rīgā pasūtījumiem virs €40
+          Rīgā pasūtījumiem virs €50
         </div>
         <div className="bulletpointRow">
           <GiOrange
