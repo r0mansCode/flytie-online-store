@@ -35,6 +35,14 @@ export const Contacts = () => {
           <AiOutlineClockCircle />
           &nbsp; Sestdiena: 12:00 - 17:00
         </div>
+        <br />
+        <strong>Mūsu rekvizīti:</strong>
+        SIA FLYTIE <br />
+        Reģ. numurs 40203412845 <br />
+        Juridiskā adrese: Rīga, Zemitāna iela 9, LV-1012 <br />
+        Tel. +37127171618 <br />
+        Konta nr.: LV82HABA0551053101094 Banka: AS “Swedbanka” <br />
+        Bankas Kods: HABALV22
       </div>
       <div id="map" className="mapContainer">
         <Map />
